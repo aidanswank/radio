@@ -1,0 +1,107 @@
+.chat-container {
+    max-height: 300px;
+    /* Set maximum height for the chat container */
+    overflow-y: auto;
+    /* Enable vertical scrolling */
+    border: 1px solid #ccc;
+    /* Add border for visual separation */
+    padding: 10px;
+    /* Add padding for spacing */
+}
+
+.main-chat-container {
+    border: 1px dashed #ccc;
+    /* Add border for visual separation */
+    padding: 10px;
+    /* Add padding for spacing */
+}
+
+/* Style for chat messages */
+#messages {
+    list-style-type: none;
+    /* Remove default list styles */
+    padding: 0;
+    margin: 0;
+}
+
+#messages li {
+    margin-bottom: 5px;
+    /* Add spacing between messages */
+}
+
+/* Style for chat messages */
+#messages {
+    list-style-type: none;
+    /* Remove default list styles */
+    padding: 0;
+    margin: 0;
+}
+
+#messages li {
+    margin-bottom: 5px;
+    /* Add spacing between messages */
+}
+
+/* Alternating row colors */
+#messages li:nth-child(odd) {
+    background-color: #f9f9f9;
+    /* Light gray for odd rows */
+}
+
+#messages li:nth-child(even) {
+    background-color: rgba(235, 235, 235, 0.708);
+    /* Slightly darker gray for even rows */
+}
+
+/* Style for nickname input and button */
+#nickname-container {
+    display: flex;
+    /* Use flexbox to arrange items */
+    margin-bottom: 10px;
+    /* Add margin below the nickname input */
+    border: 1px solid #ccc;
+    /* Add border for visual separation */
+    padding: 5px;
+    /* Add padding for spacing */
+}
+
+#nickname {
+    flex-grow: 1;
+    /* Allow the input to grow and fill remaining space */
+    margin-right: 10px;
+    /* Add margin between input and button */
+    border: none;
+    /* Remove border for input field */
+    outline: none;
+    /* Remove outline when focused */
+}
+
+#set-nickname {
+    flex-shrink: 0;
+    /* Prevent the button from shrinking */
+}
+
+/* Style for chat input form */
+#form {
+    display: flex;
+    /* Use flexbox to arrange form elements */
+    align-items: center;
+    /* Center items vertically */
+    display: none;
+}
+
+#form input {
+    flex-grow: 1;
+    /* Allow input to grow and fill remaining space */
+}
+
+#form button {
+    margin-left: 10px;
+    /* Add margin between input and button */
+}
+
+/* Style for system messages */
+.system-message {
+    color: #338485;
+    /* font-weight: bold; */
+}

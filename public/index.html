@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>tiny radio</title>
+	<link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+	<h1>HEADS I WIN ** TAILS YOU LOSE **</h1>
+	<marquee>** LIVE ** ON AIR ** DIGITAL STREAM **</marquee>
+	<audio controls>
+		<source src="http://64.23.185.10:8000/stream" type="audio/mpeg">
+		Your browser does not support the audio element.
+	</audio>
+
+	<hr>
+
+	<!-- Nickname input and button container -->
+	<div id="nickname-container">
+		<input id="nickname" placeholder="Enter your nickname" />
+		<button id="set-nickname">Set Nickname</button>
+	</div>
+	<!-- Add a simple chat interface -->
+	<p id="current-nickname"></p>
+
+	<!-- Add a section to display connected users -->
+	Connected users:
+	<div id="connected-users"></div>
+
+	<div class="main-chat-container">
+		<div class="chat-container">
+			<ol id="messages"></ol>
+		</div>
+		<form id="form" action="">
+			<input id="m" autocomplete="off" /><button>Send</button>
+		</form>
+	</div>
+
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.1.2/socket.io.js"></script>
+	<script src="client.js"></script>
+</body>
+
+</html>
