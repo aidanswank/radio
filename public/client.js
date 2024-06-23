@@ -1,6 +1,11 @@
-// chat client
-
 var socket = io();
+
+let localStream;
+let peerConnection;
+
+// Set up video elements (add these to your HTML)
+const localVideo = document.getElementById('localVideo');
+const remoteVideo = document.getElementById('remoteVideo');
 
 // https://stackoverflow.com/questions/3426404/create-a-hexadecimal-colour-based-on-a-string-with-javascript
 function getColorForNickname(string) {
@@ -45,7 +50,6 @@ function appendSystemMessage(message) {
     chatContainer.scrollTop = chatContainer.scrollHeight;
 }
 
-
 // Listen for chat messages
 socket.on('chat message', function (msg) {
     appendMessage(msg.timestamp, msg.nickname, msg.message);
@@ -60,6 +64,7 @@ socket.on('recent messages', function (messages) {
         appendMessage(msg.timestamp, msg.nickname, msg.message);
     });
 });
+
 // Listen for connected users event
 socket.on('connected users', function (users) {
     console.log("users", users);
@@ -113,7 +118,6 @@ document.getElementById('set-nickname').addEventListener('click', function () {
                 socket.emit('set nickname', data.nickname); // Emit event to server
                 document.getElementById('nickname').value = ''; // Clear the input after setting nickname
                 document.getElementById('current-nickname').innerText = 'Current Nickname: ' + nickname;
-                // document.getElementsByName('nickname')[0].placeholder=nickname;
             }
         });
 });
@@ -127,6 +131,65 @@ socket.on('set nickname', function (nickname) {
     document.getElementById('form').style.display = 'flex'; // Show the chat input form if nickname is set
 });
 
-
 // Request recent messages on connection
 socket.emit('get recent messages');
+
+// Function to start video stream
+async function startVideo() {
+    try {
+        localStream = await navigator.mediaDevices.getUserMedia({ video: true, audio: true });
+        localVideo.srcObject = localStream;
+
+        createPeerConnection();
+
+        // Create and send offer
+        const offer = await peerConnection.createOffer();
+        await peerConnection.setLocalDescription(offer);
+        socket.emit('offer', offer);
+    } catch (error) {
+        console.error('Error starting video:', error);
+    }
+}
+
+function createPeerConnection() {
+    peerConnection = new RTCPeerConnection();
+
+    localStream.getTracks().forEach(track => {
+        peerConnection.addTrack(track, localStream);
+    });
+
+    peerConnection.ontrack = (event) => {
+        remoteVideo.srcObject = event.streams[0];
+    };
+
+    peerConnection.onicecandidate = (event) => {
+        if (event.candidate) {
+            socket.emit('ice-candidate', event.candidate);
+        }
+    };
+}
+
+// Handle incoming offer
+socket.on('offer', async (offer) => {
+    if (!peerConnection) {
+        createPeerConnection();
+    }
+
+    await peerConnection.setRemoteDescription(offer);
+    const answer = await peerConnection.createAnswer();
+    await peerConnection.setLocalDescription(answer);
+    socket.emit('answer', answer);
+});
+
+// Handle incoming answer
+socket.on('answer', async (answer) => {
+    await peerConnection.setRemoteDescription(answer);
+});
+
+// Handle ICE candidates
+socket.on('ice-candidate', (candidate) => {
+    peerConnection.addIceCandidate(new RTCIceCandidate(candidate));
+});
+
+// Call startVideo() when you want to start the video stream
+document.getElementById('start-video').addEventListener('click', startVideo);
