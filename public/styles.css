@@ -1,3 +1,8 @@
+body {
+    /* background-image: url("pup.jpg");
+    background-repeat: repeat; */
+  }
+
 .chat-container {
     max-height: 300px;
     /* Set maximum height for the chat container */
@@ -7,6 +12,7 @@
     /* Add border for visual separation */
     padding: 10px;
     /* Add padding for spacing */
+    /* background-color: #338485; */
 }
 
 .main-chat-container {
@@ -14,6 +20,7 @@
     /* Add border for visual separation */
     padding: 10px;
     /* Add padding for spacing */
+    background-color: #ffffff;
 }
 
 /* Style for chat messages */
@@ -104,4 +111,38 @@
 .system-message {
     color: #338485;
     /* font-weight: bold; */
+}
+
+.background-image {
+    background-image: url("pup.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    position: relative;
+    width: 100%;
+    height: 100vh; /* Full viewport height */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.audio-player {
+    max-width: 400px; /* Set a fixed width for the player */
+    padding: 20px;
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background for the player */
+    border-radius: 4px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    position: relative;
+    z-index: 1; /* Ensure the player is on top of the background image */
+}
+
+.audio-player audio {
+    /* width: 100%;
+    border: none;
+    outline: none;
+    color: #fff;
+    padding: 10px;
+    border-radius: 4px; */
+    background-color: 0;
+    background-image: url("pup.jpg");
 }
