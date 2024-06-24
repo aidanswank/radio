@@ -7,25 +7,53 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>tiny radio</title>
 	<link rel="stylesheet" href="styles.css">
+	<script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
 </head>
 
 <body>
 	<h1>HEADS I WIN ** TAILS YOU LOSE **</h1>
 	<marquee>** LIVE ** ON AIR ** DIGITAL STREAM **</marquee>
 
-	<video controls width="640" height="360">
-		<source src="http://fo2.us:8000/example.ts" type="video/mp2ts">
-		Your browser does not support the video tag.
-	</video>
-	
-    <div class="background-image">
+    <video id="liveStream" controls width="640" height="360"></video>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            var video = document.getElementById('liveStream');
+
+            if (Hls.isSupported()) {
+                var hls = new Hls();
+                hls.loadSource('http://fo2.us:8000/example.ts');
+                hls.attachMedia(video);
+                hls.on(Hls.Events.MANIFEST_PARSED, function() {
+                    video.play();
+                });
+                hls.on(Hls.Events.ERROR, function(event, data) {
+                    var errorType = data.type;
+                    var errorDetails = data.details;
+                    var errorFatal = data.fatal;
+                    var errorMessage = `Type: ${errorType}, Details: ${errorDetails}, Fatal: ${errorFatal}`;
+                    document.getElementById('error').innerText = errorMessage;
+                    console.error('HLS.js error:', errorMessage);
+                });
+            } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
+                video.src = 'http://fo2.us:8000/example.ts';
+                video.addEventListener('canplay', function() {
+                    video.play();
+                });
+            } else {
+                console.error("This browser does not support HLS.js or native HLS playback.");
+                document.getElementById('error').innerText = "This browser does not support HLS.js or native HLS playback.";
+            }
+        });
+    </script>
+
+    <!-- <div class="background-image">
         <div class="audio-player">
             <audio controls>
                 <source src="http://64.23.185.10:8000/stream" type="audio/mpeg">
                 Your browser does not support the audio element.
             </audio>
         </div>
-    </div>
+    </div> -->
 	
 	<!-- <img src="pup.jpg"> -->
 	<hr>
