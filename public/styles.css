@@ -1,148 +1,136 @@
-body {
-    /* background-image: url("pup.jpg");
-    background-repeat: repeat; */
-  }
+/* Import custom font */
+@font-face {
+    font-family: 'BillyArgel';
+    src: url('Billy_Argel_Font.ttf') format('truetype');
+}
+
+body, html {
+    margin: 0;
+    height: 100%;
+    overflow: hidden;
+    font-family: cursive;
+    color: green;
+}
+
+h1 {
+    color: white;
+    font-family: 'BillyArgel';
+    background-color: black;
+}
+
+p {
+    color: rgb(170, 255, 0);
+    text-shadow: 0px 5px 5px black;
+}
+
+.container {
+    display: flex;
+    height: 100vh; /* Full height of the viewport */
+}
+
+.audio-player, .chat-stuff {
+    flex: 1; /* Each section takes up equal space */
+    padding: 20px; /* Optional: Add some padding */
+    box-sizing: border-box; /* Ensure padding doesn't affect width */
+    overflow-y: auto;
+    background-color: #8dfb8fba;
+}
+
+.audio-player {
+    background-color: #ccccccba;
+}
+
+#background-canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+}
+
+.audio-player, h1, marquee, .main-chat-container, #nickname-container, #current-nickname, #connected-users {
+    position: relative;
+    z-index: 1;
+}
 
 .chat-container {
-    max-height: 300px;
-    /* Set maximum height for the chat container */
+    max-height: 400px;
     overflow-y: auto;
-    /* Enable vertical scrolling */
     border: 1px solid #ccc;
-    /* Add border for visual separation */
     padding: 10px;
-    /* Add padding for spacing */
-    /* background-color: #338485; */
+    
 }
 
 .main-chat-container {
     border: 1px dashed #ccc;
-    /* Add border for visual separation */
     padding: 10px;
-    /* Add padding for spacing */
     background-color: #ffffff;
+    /* position: absolute; */
+    /* height: fit-content; */
 }
 
-/* Style for chat messages */
 #messages {
     list-style-type: none;
-    /* Remove default list styles */
     padding: 0;
     margin: 0;
 }
 
 #messages li {
     margin-bottom: 5px;
-    /* Add spacing between messages */
 }
 
-/* Style for chat messages */
-#messages {
-    list-style-type: none;
-    /* Remove default list styles */
-    padding: 0;
-    margin: 0;
-}
-
-#messages li {
-    margin-bottom: 5px;
-    /* Add spacing between messages */
-}
-
-/* Alternating row colors */
 #messages li:nth-child(odd) {
     background-color: #f9f9f9;
-    /* Light gray for odd rows */
 }
 
 #messages li:nth-child(even) {
     background-color: rgba(235, 235, 235, 0.708);
-    /* Slightly darker gray for even rows */
 }
 
-/* Style for nickname input and button */
 #nickname-container {
     display: flex;
-    /* Use flexbox to arrange items */
     margin-bottom: 10px;
-    /* Add margin below the nickname input */
     border: 1px solid #ccc;
-    /* Add border for visual separation */
     padding: 5px;
-    /* Add padding for spacing */
 }
 
 #nickname {
     flex-grow: 1;
-    /* Allow the input to grow and fill remaining space */
     margin-right: 10px;
-    /* Add margin between input and button */
     border: none;
-    /* Remove border for input field */
     outline: none;
-    /* Remove outline when focused */
 }
 
 #set-nickname {
     flex-shrink: 0;
-    /* Prevent the button from shrinking */
 }
 
-/* Style for chat input form */
 #form {
     display: flex;
-    /* Use flexbox to arrange form elements */
     align-items: center;
-    /* Center items vertically */
     display: none;
 }
 
 #form input {
     flex-grow: 1;
-    /* Allow input to grow and fill remaining space */
 }
 
 #form button {
     margin-left: 10px;
-    /* Add margin between input and button */
 }
 
-/* Style for system messages */
 .system-message {
     color: #338485;
-    /* font-weight: bold; */
 }
 
-.background-image {
-    background-image: url("pup.jpg");
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center;
-    position: relative;
-    width: 100%;
-    height: 100vh; /* Full viewport height */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
+/* Media Queries for Responsive Design */
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column;
+    }
 
-.audio-player {
-    max-width: 400px; /* Set a fixed width for the player */
-    padding: 20px;
-    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background for the player */
-    border-radius: 4px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-    position: relative;
-    z-index: 1; /* Ensure the player is on top of the background image */
-}
-
-.audio-player audio {
-    /* width: 100%;
-    border: none;
-    outline: none;
-    color: #fff;
-    padding: 10px;
-    border-radius: 4px; */
-    background-color: 0;
-    background-image: url("pup.jpg");
+    .audio-player, .chat-stuff {
+        padding: 10px;
+    }
 }
