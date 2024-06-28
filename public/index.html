@@ -2,80 +2,94 @@
 <html lang="en">
 
 <head>
-	<meta charset="UTF-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>tiny radio</title>
-	<link rel="stylesheet" href="styles.css">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>tiny radio</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://vjs.zencdn.net/7.17.0/video-js.css" rel="stylesheet">
+    <script src="https://vjs.zencdn.net/7.17.0/video.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/videojs-contrib-hls/5.15.0/videojs-contrib-hls.min.js"></script>
 </head>
 
 <body>
-	<div class="container">
-		<!-- right side of the screen side of screen -->
-		<div class="audio-player">
-			<h1>** HEADS I WIN **</h1>
-			<marquee>** LIVE ** ON AIR ** DIGITAL STREAM **</marquee>
-			
-			<p>
-				denver world famous exotic skinny jean rare stream 
-				Lorem ipsum dolor sit amet consectetur, adipisicing elit. Non exercitationem eos quis rem sequi maxime rerum deserunt nam voluptatibus itaque quibusdam illum adipisci harum deleniti nemo expedita quaerat, laboriosam numquam.
-			</p>
+    <div class="container">
+        <!-- right side of the screen side of screen -->
+        <div class="audio-player">
+            <h1>** HEADS I WIN **</h1>
+            <marquee>** LIVE ** ON AIR ** DIGITAL STREAM **</marquee>
+            
+            <p>
+                denver world famous exotic skinny jean rare stream 
+                Lorem ipsum dolor sit amet consectetur, adipisicing elit. Non exercitationem eos quis rem sequi maxime rerum deserunt nam voluptatibus itaque quibusdam illum adipisci harum deleniti nemo expedita quaerat, laboriosam numquam.
+            </p>
 
-			<center>
-				<img src="back_of_shirt.png" width="100%">
-			</center>
+            <center>
+                <img src="back_of_shirt.png" width="100%">
+            </center>
 
-			<center>
-				<audio controls>
-					<source src="http://64.23.185.10:8000/stream" type="audio/mpeg">
-					Your browser does not support the audio element.
-				</audio>
-			</center>
-			<center>
-				<img src="IMG_3295.jpg" width="300px">
-				<img src="IMG_3274.jpg" width="300px">
-				<img src="IMG_3274.jpg" width="300px">
-				<img src="IMG_3295.jpg" width="300px">
-			</center>
+            <center>
+                <audio controls>
+                    <source src="http://64.23.185.10:8000/stream" type="audio/mpeg">
+                    Your browser does not support the audio element.
+                </audio>
+            </center>
+            
+            <!-- Add the HLS video stream here -->
+            <center>
+                <video id="my_video" class="video-js vjs-default-skin" controls preload="auto" width="640" height="264">
+                    <source src="https://headsiwin.live/hls/stream.m3u8" type="application/x-mpegURL">
+                </video>
+                <script>
+                    var player = videojs('my_video');
+                </script>
+            </center>
 
-			<h1>** TAILS YOU LOSE **</h1>
-			<p>
-				Lorem ipsum dolor sit amet consectetur adipisicing elit. Exercitationem similique enim officiis qui aliquam, minima odio inventore! In, vero nesciunt itaque nulla natus deleniti illo, repellendus rerum incidunt eveniet quisquam!
-			</p>
-		</div>
-		
-		<!-- left side of screen -->
-		<div class="chat-stuff">
-			<!-- Nickname input and button container -->
-			<div id="nickname-container">
-				<input id="nickname" placeholder="Enter your nickname" />
-				<button id="set-nickname">Set Nickname</button>
-			</div>
-			<!-- Add a simple chat interface -->
-			<p id="current-nickname"></p>
-			<div class="main-chat-container">
-				<div class="chat-container">
-					<ol id="messages"></ol>
-				</div>
-				<form id="form" action="">
-					<input id="m" autocomplete="off" /><button>Send</button>
-				</form>
-			</div>
-		</div>
-	</div>
+            <center>
+                <img src="IMG_3295.jpg" width="300px">
+                <img src="IMG_3274.jpg" width="300px">
+                <img src="IMG_3274.jpg" width="300px">
+                <img src="IMG_3295.jpg" width="300px">
+            </center>
 
-	<!-- Add a section to display connected users -->
-	Connected users:
-	<div id="connected-users"></div>
+            <h1>** TAILS YOU LOSE **</h1>
+            <p>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Exercitationem similique enim officiis qui aliquam, minima odio inventore! In, vero nesciunt itaque nulla natus deleniti illo, repellendus rerum incidunt eveniet quisquam!
+            </p>
+        </div>
+        
+        <!-- left side of screen -->
+        <div class="chat-stuff">
+            <!-- Nickname input and button container -->
+            <div id="nickname-container">
+                <input id="nickname" placeholder="Enter your nickname" />
+                <button id="set-nickname">Set Nickname</button>
+            </div>
+            <!-- Add a simple chat interface -->
+            <p id="current-nickname"></p>
+            <div class="main-chat-container">
+                <div class="chat-container">
+                    <ol id="messages"></ol>
+                </div>
+                <form id="form" action="">
+                    <input id="m" autocomplete="off" /><button>Send</button>
+                </form>
+            </div>
+        </div>
+    </div>
 
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.1.2/socket.io.js"></script>
-	<script src="client.js"></script>
+    <!-- Add a section to display connected users -->
+    Connected users:
+    <div id="connected-users"></div>
 
-	<div id="background-canvas"></div>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r124/three.min.js"></script>
-	<script src="https://unpkg.com/three@0.126.0/examples/js/loaders/GLTFLoader.js"></script>
-	<script src="https://unpkg.com/three@0.126.0/examples/js/controls/OrbitControls.js"></script>
-	<script src="3d.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.1.2/socket.io.js"></script>
+    <script src="client.js"></script>
+
+    <div id="background-canvas"></div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r124/three.min.js"></script>
+    <script src="https://unpkg.com/three@0.126.0/examples/js/loaders/GLTFLoader.js"></script>
+    <script src="https://unpkg.com/three@0.126.0/examples/js/controls/OrbitControls.js"></script>
+    <script src="3d.js"></script>
 </body>
 
 </html>
