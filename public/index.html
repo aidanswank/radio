@@ -7,9 +7,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>tiny radio</title>
     <link rel="stylesheet" href="styles.css">
-    <link href="https://vjs.zencdn.net/7.17.0/video-js.css" rel="stylesheet">
-    <script src="https://vjs.zencdn.net/7.17.0/video.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/videojs-contrib-hls/5.15.0/videojs-contrib-hls.min.js"></script>
+	<!-- video js -->
+	<script src="https://unpkg.com/browse/@videojs/http-streaming@3.10.0/dist/videojs-http-streaming.min.js"></script>
+	<script src="https://vjs.zencdn.net/8.10.0/video.min.js"></script>
+	<link href="https://vjs.zencdn.net/8.10.0/video-js.css" rel="stylesheet" />
 </head>
 
 <body>
@@ -28,21 +29,27 @@
                 <img src="back_of_shirt.png" width="100%">
             </center>
 
-            <center>
+            <!-- <center>
                 <audio controls>
                     <source src="http://64.23.185.10:8000/stream" type="audio/mpeg">
                     Your browser does not support the audio element.
                 </audio>
-            </center>
+            </center> -->
             
             <!-- Add the HLS video stream here -->
             <center>
-                <video id="my_video" class="video-js vjs-default-skin" controls preload="auto" width="640" height="264">
-                    <source src="https://headsiwin.live/hls/stream.m3u8" type="application/x-mpegURL">
-                </video>
-                <script>
-                    var player = videojs('my_video');
-                </script>
+				<video-js id=vid1 width=600 height=300 class="vjs-default-skin" controls>
+					<source
+					   src="https://headsiwin.live/hls/stream.m3u8"
+					   type="application/x-mpegURL">
+				  </video-js>
+				  <!-- "core" version of Video.js -->
+				  <!-- <script src="video.core.min.js"></script> -->
+				  <!-- <script src="videojs-http-streaming.min.js"></script> -->
+				  <script>
+				  var player = videojs('vid1');
+				  player.play();
+				  </script>
             </center>
 
             <center>
