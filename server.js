@@ -19,6 +19,11 @@ var sessionMiddleware = session({
 app.use(cookieParser());
 app.use(sessionMiddleware);
 
+app.use(function(req, res, next) {
+    res.header("Access-Control-Allow-Origin", "http://fo2.us");
+    next();
+});
+
 // Object to map socket IDs to nicknames
 var sessionToNickname = {}
 
