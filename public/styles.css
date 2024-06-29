@@ -124,7 +124,7 @@ p {
     color: #338485;
 }
 
-/* Media Queries for Responsive Design */
+/* Media Queries for Responsive Design
 @media (max-width: 768px) {
     .container {
         flex-direction: column;
@@ -133,4 +133,4 @@ p {
     .audio-player, .chat-stuff {
         padding: 10px;
     }
-}
+} */
